@@ -2,6 +2,6 @@
   "name": "prox-deals-email",
   "private": true,
   "scripts": {
-    "send:weekly": "python -m src.prox.cli send-weekly"
+    "send:weekly": ".venv/bin/python -m src.prox.cli send-weekly"
   }
 }
