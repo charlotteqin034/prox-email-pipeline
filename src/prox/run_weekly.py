@@ -19,8 +19,9 @@ def main():
         grouped = group_by_retailer(deals)
         html, text = render_weekly_email(u["name"], grouped, settings.manage_prefs_url)
 
-        # Dry-run output for validation
+        # dry-run output for validation
         print(f"[DRY RUN] Rendered email for {u['email']} ({len(deals)} deals)")
+        #send_email(u["email"], "Prox Weekly Deals", html, text)
 
 if __name__ == "__main__":
     main()

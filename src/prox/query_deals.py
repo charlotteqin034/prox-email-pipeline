@@ -26,12 +26,13 @@ def query_deals(preferred_retailer: list[str], limit: int = 6):
     if not retailer_ids:
         return []
     
-    
+    #only stores deals that match the retailer ids of preferred retailers
     deals = (supabase.table("deals")
         .select("retailer_id, product_id, price, start_date, end_date")
         .in_("retailer_id", retailer_ids)
         .execute()
         .data)
+    
     
     product_ids = list({deal["product_id"] for deal in deals})
     products = (
