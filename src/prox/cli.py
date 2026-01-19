@@ -1,4 +1,3 @@
-import typer
 from .ingest import ingest_deals
 from .ingest_users import ingest_users
 from .query_deals import get_users, query_deals, group_by_retailer
