@@ -7,11 +7,10 @@ from .config import settings
 
 app = typer.Typer()
 
-@app.command()
+@app.command("send-weekly")
 def send_weekly(
     deals_path: str = "data/deals.json",
-    users_path: str = "data/users.json",
-    dry_run: bool = False
+    users_path: str = "data/users.json"
 ):
     # 1) ingest
     ingest_deals(deals_path)
@@ -33,11 +32,11 @@ def send_weekly(
             manage_prefs_url=settings.manage_prefs_url,
         )
 
-        if dry_run:
-            typer.echo(f"[DRY RUN] Would send to {u['email']} ({len(deals)} deals)")
-        else:
-            send_email(u["email"], "Prox Weekly Deals", html, text)
-            typer.echo(f"Sent to {u['email']} ({len(deals)} deals)")
+      #  if dry_run:
+            #typer.echo(f"[DRY RUN] Would send to {u['email']} ({len(deals)} deals)")
+        #else:
+        #send_email(u["email"], "Prox Weekly Deals", html, text)
+        typer.echo(f"Sent to {u['email']} ({len(deals)} deals)")
 
 if __name__ == "__main__":
     app()

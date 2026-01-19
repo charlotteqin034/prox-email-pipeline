@@ -10,11 +10,9 @@ def ingest_users(users_json: str) -> dict:
         res = supabase.table("users").upsert({
             "name": user["name"],
             "email": user["email"],
-            "preferred_retailer": user["preferred_retailer"]
-        }, on_conflict="email").execute()
+            "preferred_retailers": user["preferred_retailers"]
+        }).execute()
 
-    if res.error:
-        raise RuntimeError(f"Failed to upsert user: {res.error}")
-    
+ 
     return {"status": "success"}
 

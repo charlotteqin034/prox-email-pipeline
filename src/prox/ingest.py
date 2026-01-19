@@ -7,7 +7,7 @@ def get_or_create_retailer_id(name: str) -> int:
     if exists.data:
         return exists.data[0]["id"]
     
-    created = supabase.table("retailers").insert({"name", name}).execute()
+    created = supabase.table("retailers").insert({"name": name}).execute()
 
     return created.data[0]["id"]
 
@@ -16,7 +16,7 @@ def get_or_create_product_id(name: str) -> int:
     if exists.data:
         return exists.data[0]["id"]
     
-    created = supabase.table("products").insert({"name", name}).execute()
+    created = supabase.table("products").insert({"name": name}).execute()
 
     return created.data[0]["id"]
 
@@ -32,12 +32,10 @@ def ingest_deals(deals_json: str) -> dict:
             "retailer_id": retailer_id,
             "product_id": product_id,
             "price": deal["price"],
-            "start_date": deal["start_date"],
-            "end_date": deal["end_date"]
+            "start_date": deal["start"],
+            "end_date": deal["end"]
         }, on_conflict="retailer_id,product_id,start_date").execute()
 
-        if res.error:
-            raise RuntimeError(f"Failed to upsert deal: {res.error}")
         
     return {"status": "success"}
 

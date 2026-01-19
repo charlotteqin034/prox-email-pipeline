@@ -17,7 +17,7 @@ def query_deals(preferred_retailer: list[str], limit: int = 6):
         .data
     )
 
-    if not retailers.data:
+    if not retailers:
         return []
     
     retailer_ids = [retailer["id"] for retailer in retailers]
@@ -28,7 +28,7 @@ def query_deals(preferred_retailer: list[str], limit: int = 6):
     
     
     deals = (supabase.table("deals")
-        .select("product_id, price, start_date, end_date")
+        .select("retailer_id, product_id, price, start_date, end_date")
         .in_("retailer_id", retailer_ids)
         .execute()
         .data)
