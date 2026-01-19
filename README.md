@@ -92,3 +92,6 @@ python -m src.prox.cli send-weekly
 
 Dry run (no emails sent)
 python -m src.prox.cli send-weekly --dry-run
+
+Given additional time:
+Add a retailer scraper that outputs the same JSON format, Normalize prices by unit (e.g., price per oz / lb), Add a preview web UI for email QA, Add basic observability (structured logging, metrics)
