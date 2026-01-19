@@ -1,0 +1,14 @@
+Prox — Weekly Deals
+
+Hi {{ user_name }} — your top {{ total_deals }} deals this week
+(Filtered to your preferred retailers.)
+
+{% for retailer, items in deals_by_retailer.items() %}
+{{ retailer }}
+{% for d in items %}
+- {{ d.product }} ({{ d.size }}) — ${{ '%.2f'|format(d.price) }}
+  Valid {{ d.start_date }} -> {{ d.end_date }}
+{% endfor %}
+
+{% endfor %}
+Manage preferences: {{ manage_prefs_url }}
